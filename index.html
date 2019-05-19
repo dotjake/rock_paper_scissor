@@ -81,20 +81,24 @@
             return [resultText,playerSelection,computerSelection,finishText];
         }
 
-        function game(rounds = 2){
+        function game(rounds = 5){
             let score = [];
             let pick = 0;
             let play = null;
+            let roundCount = 1;
 
             while(rounds>0){
-                pick = prompt("Pick a play, 0 = Rock, 1 = Paper and 2 = Scissor");
+                pick = prompt("Pick a play, Rock = 0, Paper = 1 and Scissor = 2");
                 play = playRound(parseInt(pick));
+                console.log("=== Round "+roundCount.toString()+" ===")
                 rounds--;
+                roundCount++;
                 console.log(play[3]);
                 score.push(play[0]);
 
             }
-            return score;
+            
+            console.log("NO MORE ROUNDS, SCORE COUNT:" + score);
         }
 
     </script>
