@@ -18,12 +18,12 @@
 
 
     
-        function playRound(playerSelection,computerSelection){
+        function playRound(playerSelection){
             //This function plays the round, checks if its a win or draw
-            //Returns result in an array [WIN, DRAW, PLAYER SELECTION, COMPUTER SELECTION,FINISHTEXT]
-            let win = true;
-            let draw = false;
+            //Returns result in an array ["WIN,DRAW or LOSE", PLAYER SELECTION, COMPUTER SELECTION,FINISHTEXT]
             let finishText = "";
+            let resultText = "";
+            let computerSelection = computerPlay();
             
             // The switch case checks the player selection and runs if statements to determine if it was a win or draw
             switch(playerSelection){
@@ -31,16 +31,15 @@
                 //Rock
                 if(computerSelection == 0){
                     //Rock-Rock
-                    win = false;
-                    draw = true;
+                    resultText = "DRAW";
                     finishText = "ITS A DRAW!";
                 }else if(computerSelection == 1){
                     //Rock-Paper
-                    win = false;
+                    resultText = "LOSE";
                     finishText="YOU LOSE! PAPER BEATS ROCK!";
                 }else{
                     //Rock-Scissor
-                    win = true;
+                    resultText = "WIN";
                     finishText = "YOU WIN! ROCK BEATS SCISSOR";
                 }
                 break;
@@ -49,16 +48,15 @@
                 //Paper
                 if(computerSelection == 1){
                     //Paper-Paper
-                    win = false;
-                    draw = true;
+                    resultText = "DRAW";
                     finishText = "ITS A DRAW!";
                 }else if(computerSelection == 2){
                     //Paper-Scissor
-                    win = false;
+                    resultText = "LOSE";
                     finishText="YOU LOSE! SCISSOR BEATS PAPER!";
                 }else{
                     //Paper-Rock
-                    win = true;
+                    resultText = "WIN";
                     finishText="YOU WIN! PAPER BEATS ROCK!";
                 }
                 break;
@@ -67,25 +65,36 @@
                 //Scissor
                 if(computerSelection == 2){
                     //Scissor-Scissor
-                    win = false;
-                    draw = true;
+                    resultText = "DRAW";
                     finishText = "ITS A DRAW!";
                 }else if(computerSelection == 0){
                     //Scissor-Rock
-                    win = false;
+                    resultText = "LOSE";
                     finishText = "YOU LOSE! ROCK BEATS SCISSOR!";
                 }else{
                     //Scissor-Papper
-                    win = true;
+                    resultText = "WIN";
                     finishText = "YOU WIN! SCISSOR BEATS PAPER!";
                 }
                 break;
             }
-            return [win,draw,playerSelection,computerSelection,finishText];
+            return [resultText,playerSelection,computerSelection,finishText];
         }
 
-        function game(rounds = 5){
-            let score = []
+        function game(rounds = 2){
+            let score = [];
+            let pick = 0;
+            let play = null;
+
+            while(rounds>0){
+                pick = prompt("Pick a play, 0 = Rock, 1 = Paper and 2 = Scissor");
+                play = playRound(parseInt(pick));
+                rounds--;
+                console.log(play[3]);
+                score.push(play[0]);
+
+            }
+            return score;
         }
 
     </script>
